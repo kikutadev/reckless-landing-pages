@@ -7,8 +7,8 @@
   <meta name="description" content="エンジン停止。畑、外洋、市街地、峡谷、嵐の島。どこでも降ろせるローポリ3Dフライトアクション。">
   <title>無茶な着陸 — 飛行機をどこでも降ろせ</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <script type="module" crossorigin src="./assets/index-BTw9CtuL.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-kXIzZLBH.css">
+  <script type="module" crossorigin src="./assets/index-BlNg916Z.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DxE852yh.css">
 </head>
 <body>
   <canvas id="game" aria-label="飛行機と着陸する世界の3D画面"></canvas>
@@ -36,29 +36,49 @@
 
     <section id="menu" class="panel" aria-label="スタートメニュー">
       <p class="eyebrow">ENGINE FAILURE / 緊急着陸</p>
-      <h1>無茶な<span>着陸</span></h1>
+      <div class="menu-title-row">
+        <h1>無茶な<span>着陸</span></h1>
+        <button id="help-open" class="help-button" type="button" aria-label="操作方法と着陸のコツ" aria-controls="help-overlay" aria-expanded="false">?</button>
+      </div>
       <p class="tagline">飛行機をどこでも降ろせ。</p>
       <p class="intro">畑でも、海でも、街の真ん中でも。<br>ボロボロになっても、止まれれば生還。</p>
       <p class="section-label">挑戦する地域</p>
       <div id="stage-select" role="group" aria-label="ステージ選択"></div>
       <p id="stage-desc"></p>
       <button id="start" class="primary" type="button" disabled>機体を準備中…</button>
-      <p class="instructions">
-        <span class="touch-guide">左スティック：下で機首上げ／左右で旋回。ブレーキは押す間だけ</span>
-        <span class="keyboard-guide">← → 旋回　↓ 機首上げ　↑ 機首下げ　SPACE ブレーキ</span>
-      </p>
     </section>
 
+    <div id="help-overlay" hidden>
+      <button id="help-backdrop" type="button" aria-label="ヘルプを閉じる"></button>
+      <section id="help-panel" role="dialog" aria-modal="true" aria-labelledby="help-title">
+        <div class="help-heading">
+          <h2 id="help-title">操作と着陸のコツ</h2>
+          <button id="help-close" type="button" aria-label="ヘルプを閉じる">×</button>
+        </div>
+        <p class="help-controls touch-guide">左スティック：左右に傾けて旋回、下で機首を上げる。右のブレーキは押している間だけ減速。</p>
+        <p class="help-controls keyboard-guide">← → 旋回　↓ 機首上げ　↑ 機首下げ　SPACE 減速</p>
+        <ul>
+          <li>地形を見て、降ろせそうな場所を自分で探そう。</li>
+          <li>接地前に減速し、機首を上げて降下を抑えよう。</li>
+          <li>減速しすぎると失速する。ブレーキは離す判断も大事。</li>
+          <li>海にも着水できる。速度を落として、水面に水平に近く入ろう。</li>
+          <li>翼が取れても、胴体が止まれば生還になる。</li>
+        </ul>
+      </section>
+    </div>
+
     <section id="result" class="panel" aria-label="着陸結果" hidden>
-      <p class="eyebrow" id="result-stage"></p>
-      <h2 id="result-title"></h2>
-      <p id="result-desc"></p>
+      <div class="result-main">
+        <p class="eyebrow" id="result-stage"></p>
+        <h2 id="result-title"></h2>
+        <p id="result-desc"></p>
+      </div>
       <div id="result-stats"></div>
       <div class="result-actions">
         <button id="next" class="primary" type="button">次の空へ</button>
         <button id="retry" class="secondary" type="button">もう一度飛ぶ</button>
+        <button id="home" class="text-button" type="button">ステージ選択に戻る</button>
       </div>
-      <button id="home" class="text-button" type="button">ステージ選択に戻る</button>
     </section>
 
     <section id="pause-panel" class="panel" aria-label="一時停止メニュー" hidden>
