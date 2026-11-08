@@ -7,7 +7,7 @@
   <meta name="description" content="エンジン停止。道路もビーチも山道も、着陸できれば生還。30〜60秒のローポリ3Dフライトアクション。">
   <title>無茶な着陸 — 飛行機をどこでも降ろせ</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <script type="module" crossorigin src="./assets/index-CUNJkZPO.js"></script>
+  <script type="module" crossorigin src="./assets/index-zj0jWRlz.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-BkVhNLE0.css">
 </head>
 <body>
@@ -37,7 +37,7 @@
         <span data-part="tail">尾翼破損</span>
         <span data-part="rightWing">右翼破損</span>
       </div>
-      <div id="hint">← → 旋回　↑ ↓ 機首　SPACE 減速</div>
+      <div id="hint">← → 旋回　↑ ↓ 機首　SPACE ブレーキ</div>
     </div>
 
     <section id="menu" class="panel" aria-label="スタートメニュー">
@@ -50,8 +50,8 @@
       <p id="stage-desc"></p>
       <button id="start" class="primary" type="button" disabled>機体を準備中…</button>
       <p class="instructions">
-        <span class="touch-guide">左のスティックで傾ける ／ 右のボタンで減速</span>
-        <span class="keyboard-guide">← → 旋回　↑ ↓ 機首　SPACE 減速</span>
+        <span class="touch-guide">左のスティックで傾ける ／ 右のブレーキを長押し</span>
+        <span class="keyboard-guide">← → 旋回　↑ ↓ 機首　SPACE ブレーキ</span>
       </p>
     </section>
 
@@ -81,7 +81,7 @@
         <div id="stick" role="group" aria-label="機体を傾けるスティック"><span></span></div>
         <small>機体を傾ける</small>
       </div>
-      <button id="brake" type="button" aria-label="押している間、減速する"><strong>減速</strong><small>長押し</small></button>
+      <button id="brake" type="button" aria-label="空中は減速、接地後は停止するブレーキ"><strong>ブレーキ</strong><small>長押し</small></button>
     </div>
 
     <div id="loading-error" hidden></div>
