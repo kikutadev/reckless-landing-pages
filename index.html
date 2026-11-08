@@ -7,8 +7,8 @@
   <meta name="description" content="エンジン停止。道路もビーチも山道も、着陸できれば生還。30〜60秒のローポリ3Dフライトアクション。">
   <title>無茶な着陸 — 飛行機をどこでも降ろせ</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <script type="module" crossorigin src="./assets/index-zj0jWRlz.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BkVhNLE0.css">
+  <script type="module" crossorigin src="./assets/index-I0pqOBsV.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-sqGdZYaL.css">
 </head>
 <body>
   <canvas id="game" aria-label="飛行機と着陸する世界の3D画面"></canvas>
@@ -19,25 +19,19 @@
     </header>
 
     <div id="hud" hidden>
-      <div class="flight-summary">
-        <span id="stage-label"></span>
-        <span id="wind"></span>
-      </div>
       <div class="instruments" aria-label="飛行計器">
-        <div class="instrument"><small>対地高度</small><strong id="alt">155</strong><em>m</em></div>
-        <div class="instrument"><small>速度</small><strong id="speed">135</strong><em>km/h</em></div>
-        <div class="instrument"><small>機体</small><strong id="health">100</strong><em>%</em></div>
+        <div class="instrument" id="meter-alt"><small>高度</small><span><strong id="alt">155</strong><em>m</em></span></div>
+        <div class="instrument" id="meter-speed"><small>速度</small><span><strong id="speed">403</strong><em>km/h</em></span></div>
+        <div class="instrument" id="meter-risk"><small id="risk-label">降下</small><span><strong id="risk-value">12</strong><em id="risk-unit">m/s</em></span></div>
       </div>
-      <div id="status" class="flight-status">エンジン停止 · 着地点は自由</div>
-      <div id="notice" role="status" aria-live="polite"></div>
-      <div id="attitude" aria-hidden="true"><i></i><span></span></div>
-      <div id="parts" aria-live="polite" aria-label="破損した部品">
-        <span data-part="leftWing">左翼破損</span>
-        <span data-part="gear">脚破損</span>
-        <span data-part="tail">尾翼破損</span>
-        <span data-part="rightWing">右翼破損</span>
+      <div class="flight-summary">
+        <span id="stage-label" hidden></span>
+        <span id="wind" hidden></span>
       </div>
-      <div id="hint">← → 旋回　↑ ↓ 機首　SPACE ブレーキ</div>
+      <div id="hud-message">
+        <div id="status"></div>
+        <div id="notice" role="status" aria-live="polite"></div>
+      </div>
     </div>
 
     <section id="menu" class="panel" aria-label="スタートメニュー">
@@ -50,8 +44,8 @@
       <p id="stage-desc"></p>
       <button id="start" class="primary" type="button" disabled>機体を準備中…</button>
       <p class="instructions">
-        <span class="touch-guide">左のスティックで傾ける ／ 右のブレーキを長押し</span>
-        <span class="keyboard-guide">← → 旋回　↑ ↓ 機首　SPACE ブレーキ</span>
+        <span class="touch-guide">左スティック：下で機首上げ／左右で旋回。ブレーキは押す間だけ</span>
+        <span class="keyboard-guide">← → 旋回　↓ 機首上げ　↑ 機首下げ　SPACE ブレーキ</span>
       </p>
     </section>
 
@@ -79,9 +73,9 @@
     <div id="touch" hidden>
       <div class="stick-control">
         <div id="stick" role="group" aria-label="機体を傾けるスティック"><span></span></div>
-        <small>機体を傾ける</small>
+        <small>下で機首上げ</small>
       </div>
-      <button id="brake" type="button" aria-label="空中は減速、接地後は停止するブレーキ"><strong>ブレーキ</strong><small>長押し</small></button>
+      <button id="brake" type="button" aria-label="空中は減速、接地後は停止するブレーキ"><strong>ブレーキ</strong><small>押す間</small></button>
     </div>
 
     <div id="loading-error" hidden></div>
