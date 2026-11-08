@@ -1,10 +1,91 @@
-<!doctype html><html lang="ja"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"/><meta name="theme-color" content="#112f35"/><title>無茶な着陸 — 飛行機をどこでも降ろせ</title><link rel="icon" type="image/svg+xml" href="./favicon.svg"/>  <script type="module" crossorigin src="./assets/index-DAKl1ouF.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-J1_4h8ed.css">
-</head><body><canvas id="game"></canvas><div id="ui">
-<header><div class="brand">無茶な着陸 <span>DEAD STICK</span></div><button id="pause" aria-label="一時停止" hidden>Ⅱ</button></header>
-<div id="hud" hidden><div class="flightlabel"><span id="stage-label"></span><b id="status">エンジン停止</b></div><div class="instruments"><div><small>対地高度</small><strong id="alt">155</strong><em>m</em></div><div><small>速度</small><strong id="speed">130</strong><em>km/h</em></div><div><small>機体</small><strong id="health">100</strong><em>%</em></div></div><div id="wind"></div><div id="notice" role="status"></div><div id="attitude"><i></i><span></span></div><div id="parts"><span data-part="leftWing">左翼</span><span data-part="gear">脚</span><span data-part="tail">尾翼</span><span data-part="rightWing">右翼</span></div><div id="hint">矢印 / WASD：傾き　 SPACE：減速</div></div>
-<section id="menu" class="panel"><p class="eyebrow">エンジン停止。地上までは、あとわずか。</p><h1>無茶な<span>着陸</span><i>飛行機をどこでも降ろせ</i></h1><p class="intro">降りる場所は、自分で決める。<br>翼がなくても、止まれれば生還。</p><div id="stage-select"></div><p id="stage-desc"></p><button id="start" class="primary" disabled>機体を準備中…</button><p class="instructions">← → 旋回　↑ 機首下げ　↓ 機首上げ<br>SPACE 減速 · 接地前に翼を水平に</p></section>
-<section id="result" class="panel" hidden><p class="eyebrow" id="result-stage"></p><h2 id="result-title"></h2><p id="result-desc"></p><div id="result-stats"></div><button id="next" class="primary">次の空へ</button><button id="retry" class="secondary">もう一度飛ぶ</button><button id="home" class="text-button">ステージ選択</button></section>
-<section id="pause-panel" class="panel" hidden><p class="eyebrow">PAUSED</p><h2>ひと息つこう</h2><button id="resume" class="primary">飛行を続ける</button><button id="restart" class="secondary">最初から飛ぶ</button><button id="pause-home" class="text-button">ステージ選択</button></section>
-<div id="touch" hidden><div id="stick"><span></span><small>機体の傾き</small></div><button id="brake">減速<br><small>長押し</small></button></div>
-<div id="loading-error" hidden></div><footer id="footer">01 — EMERGENCY LANDING / 胴体が止まれば、生還。</footer></div></body></html>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#102e36">
+  <meta name="description" content="エンジン停止。道路もビーチも山道も、着陸できれば生還。30〜60秒のローポリ3Dフライトアクション。">
+  <title>無茶な着陸 — 飛行機をどこでも降ろせ</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <script type="module" crossorigin src="./assets/index-D28HVn0S.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CV1EpO8R.css">
+</head>
+<body>
+  <canvas id="game" aria-label="飛行機と着陸する世界の3D画面"></canvas>
+  <div id="ui">
+    <header id="masthead">
+      <div class="brand">無茶な着陸<span>RECKLESS LANDING</span></div>
+      <button id="pause" type="button" aria-label="一時停止" hidden>Ⅱ</button>
+    </header>
+
+    <div id="hud" hidden>
+      <div class="flight-summary">
+        <span id="stage-label"></span>
+        <span id="wind"></span>
+      </div>
+      <div class="instruments" aria-label="飛行計器">
+        <div class="instrument"><small>対地高度</small><strong id="alt">155</strong><em>m</em></div>
+        <div class="instrument"><small>速度</small><strong id="speed">135</strong><em>km/h</em></div>
+        <div class="instrument"><small>機体</small><strong id="health">100</strong><em>%</em></div>
+      </div>
+      <div id="status" class="flight-status">エンジン停止 · 着地点は自由</div>
+      <div id="notice" role="status" aria-live="polite"></div>
+      <div id="attitude" aria-hidden="true"><i></i><span></span></div>
+      <div id="parts" aria-live="polite" aria-label="破損した部品">
+        <span data-part="leftWing">左翼破損</span>
+        <span data-part="gear">脚破損</span>
+        <span data-part="tail">尾翼破損</span>
+        <span data-part="rightWing">右翼破損</span>
+      </div>
+      <div id="hint">← → 旋回　↑ ↓ 機首　SPACE 減速</div>
+    </div>
+
+    <section id="menu" class="panel" aria-label="スタートメニュー">
+      <p class="eyebrow">ENGINE FAILURE / 緊急着陸</p>
+      <h1>無茶な<span>着陸</span></h1>
+      <p class="tagline">飛行機をどこでも降ろせ。</p>
+      <p class="intro">道路でも、畑でも、海でも。<br>ボロボロになっても、止まれれば生還。</p>
+      <p class="section-label">挑戦する地域</p>
+      <div id="stage-select" role="group" aria-label="ステージ選択"></div>
+      <p id="stage-desc"></p>
+      <button id="start" class="primary" type="button" disabled>機体を準備中…</button>
+      <p class="instructions">
+        <span class="touch-guide">左のスティックで傾ける ／ 右のボタンで減速</span>
+        <span class="keyboard-guide">← → 旋回　↑ ↓ 機首　SPACE 減速</span>
+      </p>
+    </section>
+
+    <section id="result" class="panel" aria-label="着陸結果" hidden>
+      <p class="eyebrow" id="result-stage"></p>
+      <h2 id="result-title"></h2>
+      <p id="result-desc"></p>
+      <div id="result-stats"></div>
+      <div class="result-actions">
+        <button id="next" class="primary" type="button">次の空へ</button>
+        <button id="retry" class="secondary" type="button">もう一度飛ぶ</button>
+      </div>
+      <button id="home" class="text-button" type="button">ステージ選択に戻る</button>
+    </section>
+
+    <section id="pause-panel" class="panel" aria-label="一時停止メニュー" hidden>
+      <p class="eyebrow">FLIGHT PAUSED</p>
+      <h2>一時停止</h2>
+      <p class="pause-copy">再開すると、同じ高度と速度から飛行を続けます。</p>
+      <button id="resume" class="primary" type="button">飛行を再開</button>
+      <button id="restart" class="secondary" type="button">最初からやり直す</button>
+      <button id="pause-home" class="text-button" type="button">ステージ選択に戻る</button>
+    </section>
+
+    <div id="touch" hidden>
+      <div class="stick-control">
+        <div id="stick" role="group" aria-label="機体を傾けるスティック"><span></span></div>
+        <small>機体を傾ける</small>
+      </div>
+      <button id="brake" type="button" aria-label="押している間、減速する"><strong>減速</strong><small>長押し</small></button>
+    </div>
+
+    <div id="loading-error" hidden></div>
+    <footer id="footer">ENGINE OUT / 無事に止まれれば、生還。</footer>
+  </div>
+</body>
+</html>
