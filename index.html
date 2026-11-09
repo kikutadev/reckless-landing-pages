@@ -13,8 +13,8 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="着陸できればヨシ！">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <script type="module" crossorigin src="./assets/index-DC5vR6Df.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-D_7g6gMa.css">
+  <script type="module" crossorigin src="./assets/index-D2Kc4sEZ.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Cy5z7bCR.css">
 </head>
 <body>
   <canvas id="game" aria-label="飛行機と着陸する世界の3D画面"></canvas>
@@ -50,13 +50,15 @@
     </section>
 
     <section id="stage-menu" class="panel" aria-label="ステージ選択" hidden>
-      <p class="eyebrow">着陸する場所を選ぼう</p>
-      <h2>ステージ選択</h2>
+      <div class="stage-toolbar">
+        <button id="stage-back" type="button" aria-label="タイトルに戻る" title="タイトルに戻る">←</button>
+        <div class="stage-copy">
+          <h2 id="selected-stage-name"></h2>
+          <p id="stage-desc"></p>
+        </div>
+        <button id="start" class="primary" type="button" disabled>機体を準備中…</button>
+      </div>
       <div id="stage-select" role="group" aria-label="挑戦する地域"></div>
-      <p id="selected-stage-name"></p>
-      <p id="stage-desc"></p>
-      <button id="start" class="primary" type="button" disabled>機体を準備中…</button>
-      <button id="stage-back" class="text-button" type="button">タイトルに戻る</button>
     </section>
 
     <div id="help-overlay" hidden>
