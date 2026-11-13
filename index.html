@@ -13,8 +13,8 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="着陸できればヨシ！">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <script type="module" crossorigin src="./assets/index-C0LrQxdB.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BXhZZGht.css">
+  <script type="module" crossorigin src="./assets/index-BZ88Hm-2.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B8APUmZn.css">
 </head>
 <body>
   <canvas id="game" aria-label="飛行機と着陸する世界の3D画面"></canvas>
@@ -22,6 +22,12 @@
     <header id="masthead">
       <button id="pause" type="button" aria-label="一時停止" hidden>Ⅱ</button>
     </header>
+
+    <div id="danger-vignette" aria-hidden="true" hidden></div>
+    <div id="danger-callout" role="alert" aria-live="assertive" aria-atomic="true" hidden>
+      <strong id="danger-headline"></strong>
+      <span id="danger-action"></span>
+    </div>
 
     <div id="hud" hidden>
       <div class="instruments" aria-label="飛行計器">
