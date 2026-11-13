@@ -13,8 +13,8 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="着陸できればヨシ！">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-  <script type="module" crossorigin src="./assets/index-SeWlawLJ.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-B-bgDMJV.css">
+  <script type="module" crossorigin src="./assets/index-C0LrQxdB.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BXhZZGht.css">
 </head>
 <body>
   <canvas id="game" aria-label="飛行機と着陸する世界の3D画面"></canvas>
@@ -74,6 +74,15 @@
           <li><strong>海は早めに減速。</strong> 最初にブレーキで速度を落とし、接水前は離して失速を防ぐ。接地まで70〜100mになったらスティックを下へ動かして機首を上げ、降下を抑えよう。高速突入や急降下は墜落する。翼や脚が壊れても、胴体が止まれば生還できる。</li>
         </ul>
       </section>
+    </div>
+
+    <div id="victory-announcement" aria-live="polite" aria-atomic="true" hidden>
+      <div class="victory-burst" aria-hidden="true"></div>
+      <div class="victory-lettering">
+        <p class="victory-kicker">LANDING SUCCESS</p>
+        <strong id="victory-headline">生還！</strong>
+        <p id="victory-subtitle">100人、全員助かった。</p>
+      </div>
     </div>
 
     <section id="result" class="panel" aria-label="着陸結果" hidden>
